@@ -64,7 +64,9 @@ class ParticleView: UIView {
     }
     
     
-    // Create a single circle layer
+    /// Create a single circle layer
+    ///
+    ///
     private func createCircleLayer() -> CAShapeLayer {
         let randomX = CGFloat.random(in: 50...bounds.width - 50)
         let randomY = CGFloat.random(in: 50...bounds.height - 50)
@@ -79,7 +81,9 @@ class ParticleView: UIView {
     }
     
     
-    // Animate a single circle
+    /// Animate a single circle
+    ///
+    ///
     private func animateCircle(circleLayer: CAShapeLayer) {
         // Step 3: Create a random animation
         let animation = CABasicAnimation(keyPath: "position")
@@ -241,27 +245,33 @@ class ParticleView: UIView {
         return random
     }
     
-    // Generate duration base by screen size
+    /// Generate duration base by screen size
+    ///
+    ///
     private func getDuration() -> TimeInterval {
         let size = bounds.width > bounds.height ? bounds.width : bounds.height
         
         return Double.random(in: size / 130...size / 90)
     }
     
-    // Start monitoring positions using CADisplayLink
+    /// Start monitoring positions using CADisplayLink
     private func startMonitoringPositions() {
         displayLink = CADisplayLink(target: self, selector: #selector(updateLines))
         displayLink?.preferredFrameRateRange = .init(minimum: 60, maximum: 120, __preferred: 120)
         displayLink?.add(to: .main, forMode: .common)
     }
     
-    // Stop monitoring positions
+    /// Stop monitoring positions
+    ///
+    ///
     private func stopMonitoringPositions() {
         displayLink?.invalidate()
         displayLink = nil
     }
     
-    // Update lines based on distances
+    /// Update lines based on distances
+    ///
+    ///
     @objc func updateLines() {
         let path = UIBezierPath()
         
@@ -290,7 +300,7 @@ class ParticleView: UIView {
         lineLayer.path = path.cgPath
     }
     
-    // Stop CADisplayLink when no longer needed
+    /// Stop CADisplayLink when no longer needed
     deinit {
         displayLink?.invalidate()
     }
